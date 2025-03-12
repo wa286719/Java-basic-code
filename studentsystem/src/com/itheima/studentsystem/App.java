@@ -10,17 +10,17 @@ public class App {
         User user = new User("wa", "wa286719", "001", "110");
         list.add(user);
         Scanner sc = new Scanner(System.in);
-        System.out.println("欢迎来到学生管理系统");
-        System.out.println("请选择操作1登录 2注册 3忘记密码");
-        System.out.println("请选择操作");
-        int choice = sc.nextInt();
         while (true) {
+            System.out.println("欢迎来到学生管理系统");
+            System.out.println("请选择操作1登录 2注册 3忘记密码");
+            System.out.println("请选择操作");
+            int choice = sc.nextInt();
             switch (choice) {
                 case 1:
                     login(list);
                     break;
                 case 2:
-                    System.out.println("注册");
+                    register(list);
                     break;
                 case 3:
                     System.out.println("忘记密码");
@@ -147,11 +147,12 @@ public class App {
         }
     }
 
+    //检查用户名是否合法，不合法则返回false
     public static boolean checkUserName(ArrayList<User> list, String username) {
         int countNum = 0;
         //判断用户名是否含有非法字符
         for (int i = 0; i < username.length(); i++) {
-            if (username.charAt(i) > 'a' && username.charAt(i) < 'z') {
+            if (username.charAt(i) >= 'a' && username.charAt(i) <= 'z') {
                 continue;
             } else if (username.charAt(i) >= '0' && username.charAt(i) <= '9') {
                 countNum++;
@@ -176,15 +177,94 @@ public class App {
         return true;
     }
 
+    //检查两次输入密码是否一致，不一致则返回false
+    public static boolean checkPassword(String pwd1, String pwd2) {
+        if (pwd1.equals(pwd2)) {
+            return true;
+        }
+        System.out.println("两次密码输入不一致，请重新输入！");
+        return false;
+    }
+
+    //检查输入的身份证号是否正确，不正确则返回false
+    public static boolean checkId(String id) {
+        if (id.length() != 18) {
+            System.out.println("身份证长度错误，请重新输入！");
+            return false;
+        }
+        if (id.charAt(0) == '0') {
+            System.out.println("身份证格式错误，请重新输入！");
+        }
+        for (int i = 0; i < id.length(); i++) {
+            if (id.charAt(i) < '0' || id.charAt(i) > '9') {
+                System.out.println("身份证格式错误，请重新输入！");
+                return false;
+            } else if (id.charAt(i) == 'x' || id.charAt(i) == 'X') {
+                return true;
+            }
+        }
+
+        return true;
+    }
+
+    //检查输入的手机号是否正确，不正确则返回false
+    public static boolean checkPhoneNum(String phoneNum) {
+        if (phoneNum.length() != 11 || phoneNum.charAt(0) == '0') {
+            System.out.println("输入手机号有误，请重新输入！");
+            return false;
+        }
+        return true;
+    }
+
     public static void register(ArrayList<User> list) {
         Scanner sc = new Scanner(System.in);
+        //创建一个用户对象，将用户名等信息封装其中
+        User user = new User();
+        //输入用户名并验证
         while (true) {
-            //输入用户名并验证
             System.out.println("请输入用户名：");
             String username = sc.next();
+            //检查用户名是否已存在
             if (checkContains(list, username)) {
+                System.out.println("用户名已存在，请重新输入");
+                continue;
+            } else if(!checkUserName(list, username)) {
+                System.out.println("用户名不合法，请重新输入");
+                continue;
+            } else {
+                user.setUserName(username);
                 break;
             }
         }
+        //输入密码并验证
+        while (true) {
+            System.out.println("请输入密码");
+            String pwd1 = sc.next();
+            System.out.println("请再次输入密码");
+            String pwd2 = sc.next();
+            if (checkPassword(pwd1, pwd2)) {
+                user.setPassword(pwd1);
+                break;
+            }
+        }
+        //输入身份证号并验证
+        while (true) {
+            System.out.println("请输入身份证号");
+            String id = sc.next();
+            if (checkId(id)) {
+                user.setId(id);
+                break;
+            }
+        }
+        //输入手机号并验证
+        while (true) {
+            System.out.println("请输入手机号码");
+            String phoneNum = sc.next();
+            if (checkPhoneNum(phoneNum)) {
+                user.setPhoneNumber(phoneNum);
+                break;
+            }
+        }
+        list.add(user);
     }
 }

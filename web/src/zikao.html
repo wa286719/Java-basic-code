@@ -1,0 +1,286 @@
+<script type="text/javascript">
+    var rootUrlPath = "/zxks-portal/";
+</script>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>成绩查询</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="https://www.sneac.edu.cn/zxks-portal/ui_website/net/css/stu.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript"
+            src="https://www.sneac.edu.cn/zxks-portal/ui_website/common/js/riverdefine.js"></script>
+    <script type="text/javascript"
+            src="https://www.sneac.edu.cn/zxks-portal/ui_website/common/js/riverajax.js"></script>
+    <script type="text/javascript">
+        function changeImgCode(obj){
+            obj.src = "https://www.sneac.edu.cn/zxks-portal/imagecode.gif?t="+new Date()
+        }
+    </script>
+
+</head>
+<body>
+<div id="warp">
+    <div class="warp-query-container">
+        <div id="wrap-header">
+            <div id="logo">
+                <img src="https://www.sneac.edu.cn/zxks-portal/ui_website/net/images/logo.gif">
+            </div>
+            <div id="search">
+
+                <form action="search.do" method="post" onsubmit="return check()">
+                    <input type="text" id="searchin" class="input_search"
+                           userName="searchinput"> <input type="image"
+                                                      src="https://www.sneac.edu.cn/zxks-portal/ui_website/net/images/search.gif"
+                                                      style="vertical-align: middle; margin: 0 0 0 -6px;border: 0;">
+                </form>
+
+                <script type="text/javascript">
+                    //检测是否有非法字符
+                    function CheckStr(str)
+                    {
+                        for (var i=0; i<str.length; i++){
+                            c=str.charAt(i);
+                            switch(c){
+                                case "|":
+                                    return true;
+                                case "<":
+                                    return true;
+                                case ">":
+                                    return true;
+                                case "&":
+                                    return true;
+                                case "%":
+                                    return true;
+                                case "?":
+                                    return true;
+                                case "$":
+                                    return true;
+                                case "\\":
+                                    return true;
+                                case "\'":
+                                    return true;
+                                case "\"":
+                                    return true;
+                                case "*":
+                                    return true;
+                                case ".":
+                                    return true;
+                                case "!":
+                                    return true;
+                                case "`":
+                                    return true;
+                                case "~":
+                                    return true;
+                                case "@":
+                                    return true;
+                                case "#":
+                                    return true;
+                                case "^":
+                                    return true;
+                                case "(":
+                                    return true;
+                                case ")":
+                                    return true;
+                                case "+":
+                                    return true;
+                                case "=":
+                                    return true;
+                                case "{":
+                                    return true;
+                                case "}":
+                                    return true;
+                                case "[":
+                                    return true;
+                                case "]":
+                                    return true;
+                                case ";":
+                                    return true;
+                                case ":":
+                                    return true;
+                                case "\"":
+                                    return true;
+                            }
+                        }
+                        return false;
+                    }
+                    function check() {
+                        var searchin = document.getElementById("searchin").value;
+                        if (searchin == null || searchin == "") {
+                            alert("请填写你要搜索的内容");
+                            return false;
+                        }
+                        if(CheckStr(searchin)){
+                            alert("搜索的内容中包含非法字符，请重新输入。");
+                            return false;
+                        }
+                        return true;
+                    }
+                </script>
+            </div>
+        </div>
+        <div id="news_main">
+            <div align="center">
+                <img alt="" src="https://www.sneac.edu.cn/zxks-portal/ui_website/net/images/title.png" align="center"/>
+            </div>
+            <form action="qs_queryScoreRes.action" method="post" userName="query" id="query">
+                <table width="100%" align="center" class="bk" border="1">
+                    <tr>
+                        <td colspan="2" align="center">
+                            <font style="color: red;">注意：2002年之前的考生查询时，只需填写姓名和准考证号！</font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="width: 40%;">
+                            考试时间：
+                        </td>
+                        <td style="width: 70%;">
+                            <select userName="examCode" style="width:120px;height: 25px;" >
+
+                                <option value="202410">2024年10月</option>
+
+                                <option value="202404">2024年4月</option>
+
+                                <option value="202310">2023年10月</option>
+
+                                <option value="202304">2023年4月</option>
+
+                                <option value="202210">2022年10月</option>
+
+                                <option value="202204">2022年4月</option>
+
+                                <option value="202110">2021年10月</option>
+
+                                <option value="202104">2021年4月</option>
+
+                                <option value="202010">2020年10月</option>
+
+                                <option value="202004">2020年8月</option>
+
+                                <option value="201910">2019年10月</option>
+
+                                <option value="201904">2019年4月</option>
+
+                                <option value="201810">2018年10月</option>
+
+                                <option value="201804">2018年4月</option>
+
+                                <option value="201710">2017年10月</option>
+
+                                <option value="201704">2017年4月</option>
+
+                                <option value="201610">2016年10月</option>
+
+                                <option value="201604">2016年4月</option>
+
+                                <option value="201510">2015年10月</option>
+
+                                <option value="201504">2015年4月</option>
+
+                                <option value="201410">2014年10月</option>
+
+                                <option value="201404">2014年4月</option>
+
+                                <option value="201310">2013年10月</option>
+
+                                <option value="201304">2013年4月</option>
+
+                                <option value="201210">2012年10月</option>
+
+                                <option value="201204">2012年4月</option>
+
+                                <option ><a href="https://www.sneac.edu.cn/zxks-portal/ui_website/net/queryScorehis.jsp" >2002年-2011年</a></option>
+                                <option ><a href="https://www.sneac.edu.cn/zxks-portal/ui_website/net/queryScorehis.jsp" >2002年之前</a></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="width: 40%;">
+                            姓名：
+                        </td>
+                        <td>
+                            <input type="text" userName="studName" style="width:200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="width: 40%;">
+                            准考证号：
+                        </td>
+                        <td>
+                            <input type="text" userName="studExamCode" style="width:200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="width: 40%;">
+                            身份证号：
+                        </td>
+                        <td>
+                            <input type="text" userName="idno" style="width:200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" class="bot" style="width: 40%;padding-bottom:20px;">
+                            验证码：
+                        </td>
+                        <td class="bot" style="width: 70%;padding-bottom:20px;">
+                            <input type="text" userName="checkCode" class="inputText s"
+                                   size="6" maxlength="6" style="width:140px" />
+                            <img src="https://www.sneac.edu.cn/zxks-portal/imagecode.gif"
+                                 style="vertical-align: middle;" onclick="changeImgCode(this)" />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center" class="submit-btn-td">
+                            <input type="submit" value="" class="submit-btn-style" style="background-image:url(https://www.sneac.edu.cn/zxks-portal/ui_website/net/images/btn.png);">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+        </div>
+
+
+        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <title>Insert title here</title>
+        </head>
+        <body>
+        <table style="width: 600px;margin: 0 auto; font-size:14px; font-style:宋体; color:#626262;">
+            <tr>
+                <td align="right" style="width: 75px;">地址：</td>
+                <td align="left" id="footer_address"></td>
+                <td align="right" style="width: 75px;">版本号：</td>
+                <td align="left" id="footer_version"></td>
+            </tr>
+            <tr>
+                <td align="right" style="width: 75px;">联系电话：</td>
+                <td align="left" id="footer_phone"></td>
+                <td align="right" style="width: 75px;">接待时间：</td>
+                <td align="left" id="footer_time"></td>
+            </tr>
+        </table>
+        </body>
+
+        <script type="text/javascript">
+            var address = "陕西省西安市含光北路40号";
+            var version = "V34.33-20180411";
+            var phone = "029-85221726";
+            var time = "每周二、周三（节假日除外）";
+            if(window.localStorage){
+                address = window.localStorage.getItem("footerCfg.address");
+                version = window.localStorage.getItem("footerCfg.version");
+                phone = window.localStorage.getItem("footerCfg.phone");
+                time = window.localStorage.getItem("footerCfg.time");
+            }
+            document.getElementById("footer_address").innerHTML = address;
+            document.getElementById("footer_version").innerHTML = version;
+            document.getElementById("footer_phone").innerHTML = phone;
+            document.getElementById("footer_time").innerHTML = time;
+        </script>
+        </html>
+    </div>
+</body>
+</html>

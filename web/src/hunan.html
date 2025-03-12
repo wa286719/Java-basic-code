@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+    <title>&#x6E56;&#x5357;&#x7701;2025&#x5E74;&#x7855;&#x58EB;&#x7814;&#x7A76;&#x751F;&#x62DB;&#x751F;&#x8003;&#x8BD5;&#x521D;&#x8BD5;&#x6210;&#x7EE9;</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta userName="format-detection" content="telephone=no">
+    <meta userName="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="shortcut icon" href="https://src.hneao.cn/yankao/src/favicon.ico">
+
+
+    <link rel="stylesheet" href="https://src.hneao.cn/yankao/src/cx.250201.css" />
+
+
+</head>
+<body ontouchstart>
+<div class="ks-page">
+    <div class="ks-page-head">&#x6E56;&#x5357;&#x7701;2025&#x5E74;&#x7855;&#x58EB;&#x7814;&#x7A76;&#x751F;&#x62DB;&#x751F;&#x8003;&#x8BD5;&#x521D;&#x8BD5;&#x6210;&#x7EE9;</div>
+    <div class="ks-page-see">
+        <div class="ks-see-input">
+            <div class="ks-input-group">
+                <span class="ks-input-group-label ks-see-label">&#x8003;&#x751F;&#x7F16;&#x53F7;</span>
+                <input class="ks-form-field" id="ksbh" type="text" placeholder="&#x586B;&#x5199;&#x8003;&#x751F;&#x7F16;&#x53F7;&#x6216;&#x62A5;&#x540D;&#x53F7;">
+            </div>
+        </div>
+        <div class="ks-see-input">
+            <div class="ks-input-group">
+                <span class="ks-input-group-label ks-see-label">&#x8054;&#x7CFB;&#x65B9;&#x5F0F;</span>
+                <input class="ks-form-field" id="lxfs" type="text" placeholder="&#x586B;&#x5199;&#x624B;&#x673A;&#x53F7;&#x7801;&#x6216;&#x7535;&#x5B50;&#x90AE;&#x7BB1;">
+            </div>
+        </div>
+        <input id="codeid" type="hidden" />
+        <div class="ks-see-input">
+            <div class="ks-input-group">
+                <span class="ks-input-group-label ks-see-label">验证码</span>
+                <input class="ks-form-field" id="yzm" type="text" placeholder="填写接收的验证码">
+                <span class="ks-input-group-btn">
+                <a role="button" class="ks-btn ks-btn-default ks-see-send" id="send" data-ks-load="发送中…">发送验证码</a>
+            </span>
+            </div>
+        </div>
+        <div class="ks-see-input">
+            <a href="grade.html" role="button" id="submit" class="ks-btn ks-btn-primary ks-btn-block">查询</a>
+        </div>
+        <div class="ks-ajax"></div>
+        <div id="tab">
+            <p class="ks-see-remark">查询说明：<br />1. 仅供报考在湘招生单位的考生查询本人考试成绩，报考湖南省外招生单位的考生，请向报考单位咨询查询方式。<br />2. 先在“考生编号”输入框填写考生编号或报名号，在“联系方式”输入框填写报名时登记的手机号码或电子邮箱，点击“发送验证码”按钮向本人的手机或邮箱发送验证码。<br />3. 待手机或邮箱接收到6位数字验证码后，将数字填写到“验证码”输入框中，点击“查询”按钮显示考试成绩。<br />4. 若报名时登记的手机号码和电子邮箱有误，或已不使用，或无法接收到验证码，请向报考单位申请查询。</p>
+        </div>
+    </div>
+    <script id="tpl" type="text/html">
+        <div class="ks-cells">
+            <div class="ks-cell">
+                <div class="ks-cell__bd">考生编号</div>
+                <div class="ks-cell__ft">{{ d.KSBH||'' }}</div>
+            </div>
+            <div class="ks-cell">
+                <div class="ks-cell__bd">姓名</div>
+                <div class="ks-cell__ft">{{ d.XM||'' }}</div>
+            </div>
+            <div class="ks-cell">
+                <div class="ks-cell__bd">{{ d.ZZLLMC||'' }}</div>
+                <div class="ks-cell__ft">{{ d.ZZLL||'0' }}</div>
+            </div>
+            <div class="ks-cell">
+                <div class="ks-cell__bd">{{ d.WGYMC||'' }}</div>
+                <div class="ks-cell__ft">{{ d.WGY||'0' }}</div>
+            </div>
+            {{# if(d.YWK1MC!=null && d.YWK1MC.replace(/ /g, '').length>0) { }}
+            <div class="ks-cell">
+                <div class="ks-cell__bd">{{ d.YWK1MC||'' }}</div>
+                <div class="ks-cell__ft">{{ d.YWK1||'0' }}</div>
+            </div>
+            {{# } }}
+            {{# if(d.YWK2MC!=null && d.YWK2MC.replace(/ /g, '').length>0) { }}
+            <div class="ks-cell">
+                <div class="ks-cell__bd">{{ d.YWK2MC||'' }}</div>
+                <div class="ks-cell__ft">{{ d.YWK2||'0' }}</div>
+            </div>
+            {{# } }}
+            <div class="ks-cell">
+                <div class="ks-cell__bd">总分</div>
+                <div class="ks-cell__ft">{{ d.ZF||'0' }}</div>
+            </div>
+        </div>
+        <div class="ks-see-hash">HASH:{{ d.HASH||'' }}</div>
+    </script>
+
+
+    <div class="ks-page-foot">
+        版权所有 © 2005-<span id="currentYear">2021</span> 湖南省教育考试院<br /><span id="serverNumber"></span>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+
+<script src="https://src.hneao.cn/yankao/src/cx.250201.js"></script>
+
+<script>
+    $('#currentYear').html(new Date().getFullYear());
+    $('#serverNumber').html('[3]');
+    ks.basedir = '/cjcx';
+    ks.viewSize(430);
+</script>
+
+<script type="text/javascript">
+    var opt = {
+        captcha: '',
+        yzm: '#yzm',
+        send: '#send',
+        codeid: '#codeid',
+        submit: '#submit',
+        msgdiv: '.ks-ajax',
+        tab: '#tab',
+        tpl: '#tpl',
+        keys: [{"Id":"ksbh","Title":"考生编号","Type":"text","PlaceHolder":"填写考生编号或报名号","Empty":false,"LenMin":9,"LenMax":15,"LenArr":[9,15],"Reg":"/^\\d{9,15}$/","MD5":false,"Base64":false,"Case":0},{"Id":"lxfs","Title":"联系方式","Type":"text","PlaceHolder":"填写手机号码或电子邮箱","Empty":false,"LenMin":6,"LenMax":32,"LenArr":[],"Reg":"/^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+|[1][3-9]\\d{9}$/","MD5":false,"Base64":false,"Case":-1}]
+    };
+    ks.query(opt);
+    $(function () { ks.simsun('.ks-see-remark'); });
+</script>
+
+</body>
+</html>

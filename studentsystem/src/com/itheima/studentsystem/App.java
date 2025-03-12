@@ -6,6 +6,14 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        //！！！！！！！！！！！！！！！！！！！
+        //！！！！！！！！！！！！！！！！！！！
+        //封装思想：在校验用户登录时输入的用户名密码等时，可以将其封装成一个用户类
+        //其他参数设置为null，然后定义方法来比较该用户对象和集合中用户对象的信息是否匹配
+
+        //访问其他类的方法时，可以直接用类名.方法名来访问，但应该要在同一个包下
+
+        //开发过程中如果需要用户录入数据要先验证数据是否合法，再验证唯一性
         ArrayList<User> list = new ArrayList<>();
         User user = new User("wa", "wa286719", "001", "110");
         list.add(user);
@@ -23,7 +31,7 @@ public class App {
                     register(list);
                     break;
                 case 3:
-                    System.out.println("忘记密码");
+                    forgetPassword(list);
                     break;
                 default:
                     break;
@@ -34,7 +42,7 @@ public class App {
 
     }
 
-    //check方法用于检验变量在集合中是否存在
+    //check方法用于检验用户名在集合中是否存在,存在返回true
     public static boolean checkContains(ArrayList<User> list, String username) {
         for (int i = 0; i < list.size(); i++) {
             if (username.equals(list.get(i).getUserName())) {
@@ -44,6 +52,7 @@ public class App {
         return false;
     }
 
+    //检查输入的验证码和生成的验证码是否相同，相同返回true
     public static boolean checkVerCode(String ver, String verCode) {
         if (verCode.equalsIgnoreCase(ver)) {
             return true;
@@ -51,6 +60,7 @@ public class App {
         return false;
     }
 
+    //检查登陆时封装的user对象与集合中对象的用户名和密码是否相同，相同返回true
     public static boolean checkUserInfo(ArrayList<User> list, User user) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getUserName().equals(user.getUserName()) && list.get(i).getPassword().equals(user.getPassword())) {
@@ -60,6 +70,7 @@ public class App {
         return false;
     }
 
+    //生成验证码
     public static String verificationCode() {
         //注意：如何将int型数字转变为char类型？
         //使用arr[num3] = Integer.toString(num3).charAt(0)方法
@@ -99,6 +110,7 @@ public class App {
         return verCode;
     }
 
+    //登录
     public static void login(ArrayList<User> list) {
         //生成三次循环，代表登录一共三次机会
         for (int i = 0; i < 3; i++) {
@@ -188,19 +200,23 @@ public class App {
 
     //检查输入的身份证号是否正确，不正确则返回false
     public static boolean checkId(String id) {
+        //长度为18
         if (id.length() != 18) {
             System.out.println("身份证长度错误，请重新输入！");
             return false;
         }
+        //首位数不为0
         if (id.charAt(0) == '0') {
             System.out.println("身份证格式错误，请重新输入！");
         }
+        //除第18位可以位x或X或数字外，其余各位均为数字
         for (int i = 0; i < id.length(); i++) {
             if (id.charAt(i) < '0' || id.charAt(i) > '9') {
+                if (i == id.length() - 1 && (id.charAt(i) == 'x' || id.charAt(i) == 'X')) {
+                    return true;
+                }
                 System.out.println("身份证格式错误，请重新输入！");
                 return false;
-            } else if (id.charAt(i) == 'x' || id.charAt(i) == 'X') {
-                return true;
             }
         }
 
@@ -209,6 +225,7 @@ public class App {
 
     //检查输入的手机号是否正确，不正确则返回false
     public static boolean checkPhoneNum(String phoneNum) {
+        //长度为11位且不以0开头
         if (phoneNum.length() != 11 || phoneNum.charAt(0) == '0') {
             System.out.println("输入手机号有误，请重新输入！");
             return false;
@@ -216,6 +233,7 @@ public class App {
         return true;
     }
 
+    //注册
     public static void register(ArrayList<User> list) {
         Scanner sc = new Scanner(System.in);
         //创建一个用户对象，将用户名等信息封装其中
@@ -225,11 +243,12 @@ public class App {
             System.out.println("请输入用户名：");
             String username = sc.next();
             //检查用户名是否已存在
-            if (checkContains(list, username)) {
-                System.out.println("用户名已存在，请重新输入");
-                continue;
-            } else if(!checkUserName(list, username)) {
+            //开发过程中如果需要用户录入数据要先验证数据是否合法，再验证唯一性
+            if (!checkUserName(list, username)) {
                 System.out.println("用户名不合法，请重新输入");
+                continue;
+            } else if (checkContains(list, username)) {
+                System.out.println("用户名已存在，请重新输入");
                 continue;
             } else {
                 user.setUserName(username);
@@ -266,5 +285,33 @@ public class App {
             }
         }
         list.add(user);
+    }
+
+    //忘记密码
+    public static void forgetPassword(ArrayList<User> list) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入用户名");
+        String username = sc.next();
+        if (!checkContains(list, username)) {
+            System.out.println("该用户未注册");
+            return;
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUserName().equals(username)) {
+                System.out.println("请输入身份证号");
+                String id = sc.next();
+                System.out.println("请输入手机号");
+                String phoneNum = sc.next();
+                if (list.get(i).getPhoneNumber().equals(phoneNum) && list.get(i).getId().equals(id)) {
+                    System.out.println("请输入新密码");
+                    String newPassword = sc.next();
+                    list.get(i).setPassword(newPassword);
+                    System.out.println("密码修改成功");
+                } else {
+                    System.out.println("账户信息不匹配，修改失败！");
+                    break;
+                }
+            }
+        }
     }
 }

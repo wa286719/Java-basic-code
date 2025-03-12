@@ -14,6 +14,9 @@ public class App {
         //访问其他类的方法时，可以直接用类名.方法名来访问，但应该要在同一个包下
 
         //开发过程中如果需要用户录入数据要先验证数据是否合法，再验证唯一性
+
+        //如果远程仓库发生修改导致本地仓库无法push，可以在本地创建一个新的分支，然后将远程仓库代码pull到新分支
+        //然后将master在新分支上rebase，再将master commit and push
         ArrayList<User> list = new ArrayList<>();
         User user = new User("wa", "wa286719", "001", "110");
         list.add(user);

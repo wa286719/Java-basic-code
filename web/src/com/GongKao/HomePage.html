@@ -1,0 +1,735 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="http://www.scs.gov.cn/images/gjgwyj.css" rel="stylesheet" />
+    <script src="http://www.scs.gov.cn/images/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="http://www.scs.gov.cn/images/gjgwyj_script.js"></script>
+    <link href="http://www.scs.gov.cn/images/notice4.css" rel="stylesheet" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://www.scs.gov.cn/images/png.js"></script>
+    <script>
+        PNG.fix('*');
+    </script>
+    <![endif]-->
+    <script type="text/javascript">
+        window.onload = function(){
+            //heng();
+        }
+        function checkForm(){
+            $("#searchword").val($("#searchword").val().replace(/[\-\_\,\!\|\~\`\(\)\$\#\%\^\&\*\{\}\:\;\"\L\<\>\?\']/g,''));
+            if($("#searchword").val()==""){
+                alert("请输入检索词");
+                return false;
+            }
+        }
+
+    </script>
+    <style>
+        #imgConac{position:absolute;left:363px;top:0px;}
+        .footer{position:relative;}
+        .kaoshiluyong .img1{padding-top: 8px;}
+        .kaoshiluyong .img{padding-top: 7px;}
+    </style>
+    <title>国家公务员局</title>
+</head>
+
+<body class="">
+<!-- 2024公务员专题引导页-->
+<!--
+<style>
+	.gwy {
+		background: #FFFFFF;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		overflow: hidden;
+		z-index: 1;
+	}
+	.gwy img {
+		display: block;
+		width: 850px;
+		height: 300px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -150px;
+		margin-left: -425px;
+		cursor: pointer;
+	}
+	map {
+		cursor: pointer;
+	}
+	.gwy_over {
+		overflow: hidden;
+	}
+</style>
+<div class="gwy">
+	<img src="./images/2024gwy.png" alt="" usemap="#newpic" />
+	<map name="newpic">
+		<area shape="" coords="0,0,850,160" href="http://bm.scs.gov.cn/kl2024" alt="">
+		<area shape="" coords="0,160,850,300" class="click_gwy" alt="">
+	</map>
+</div>
+<script>
+	$(document).ready(function() {
+		$('body').addClass('gwy_over')
+	})
+
+	$(function(){
+		$('.click_gwy').click(function(){
+			$(".gwy").hide();
+			$('body').removeClass('gwy_over')
+		})
+	})
+</script>
+-->
+<!-- 2024公务员专题引导页 end -->
+
+<!-- 底部广告 开始 已注释-->
+<!--
+<div id="notice" style="z-index: 1000000000000; bottom:90px;" class="visible" >
+    <a class="btn-close"></a>
+    <div class="content">
+        <div class="notice-item app" style="display: block;">
+            <div class="notice-img-app"></div>
+            <div class="notice-title" style="padding-top: 12px"><h3 style="text-align: center;"><a>网站维护公告</a></h3></div>
+            <div class="notice-content">
+                　　国家公务员局网站将于2022年04月29日18:00-24:00期间进行系统维护， 在此期间网站将无法正常访问，由此给您带来不便，敬请谅解。</div>
+    </div>
+</div>
+
+<div class="btn-wrapper" style="display: none">
+    <a class="btn-prev">上一条</a>
+    <a class="btn-next">下一条</a>
+</div>
+</div>
+-->
+<script>
+    $(function () {
+        $(".btn-close").click(function () {
+            $(this).parents(".visible").hide();
+        });
+
+        var nowpage = 1;
+        var pagecount = $(".content .notice-item").length;
+        showarea(1);
+        $(".btn-wrapper .btn-prev,.btn-wrapper .btn-next").click(function() {
+            if($(this).hasClass('btn-prev')) {
+                if(nowpage == 1) {
+                    nowpage == pagecount + 1
+                }
+                var page = --nowpage;
+            }
+            else {
+                if(nowpage == pagecount) {
+                    nowpage = 0
+                }
+                var page = ++nowpage;
+            }
+            $('.btn-wrapper .btn-prev').removeClass('btn-disabled');
+            $('.btn-wrapper .btn-next').removeClass('btn-disabled');
+            /*if(page <= 1) {
+                $(".btn-wrapper .btn-prev").addClass('btn-disabled');
+            }
+            else if(page >= pagecount) {
+                $(".btn-wrapper .btn-next").addClass('btn-disabled');
+            }*/
+            showarea(page);
+        });
+        function showarea(page) {
+            var setindex = page - 1;
+            $(".content .notice-item").eq(setindex).show().siblings('.content .notice-item').hide();
+        }
+
+        function nextWrapper(){
+
+            if(nowpage == pagecount) {
+                nowpage=0
+            }
+            var page = ++nowpage;
+
+            $('.btn-wrapper .btn-prev').removeClass('btn-disabled');
+            $('.btn-wrapper .btn-next').removeClass('btn-disabled');
+            /*if(page <= 1) {
+                $(".btn-wrapper .btn-prev").addClass('btn-disabled');
+            }
+            else if(page >= pagecount) {
+                $(".btn-wrapper .btn-next").addClass('btn-disabled');
+            }*/
+            showarea(page);
+        }
+
+        var wrapperSet = setInterval(nextWrapper, 4000);
+
+        $("#notice").hover(function(){
+            clearInterval(wrapperSet)
+        },function(){
+            wrapperSet = setInterval(nextWrapper, 4000);
+        })
+
+    });
+</script>
+<!-- 底部广告 结束 -->
+
+
+
+<!-- 加入飘红背景 加了个整体div包裹-请注意  开始 -->
+<style>
+    .body_bg{padding-top: 92px;background: url(./images/bg_piaohong_20210626.png) no-repeat top center;}
+    .min-center{padding-top: 6px; width: 1020px; margin:0 auto; border:0px solid #333;background-color: #ffffff;}
+
+</style>
+
+<!--<div class="min-center">-->
+<!-- 加入飘红背景 加了个整体div包裹-请注意需删除最后的div  结束 -->
+<!--2022-10-14首页头部飘红-->
+<!--<img src="./images/piaohong_top.jpg" alt="" style="display: block;width: 1008px;margin: 0 auto;" />-->
+<!--2022-10-25首页头部飘红-->
+
+<div class="top"></div>
+<style>
+    .nav ul {
+        margin-left: 39px;
+    }
+
+    .nav li {
+        margin-right: 65px;
+    }
+
+    .nav .nav_h1 {
+        background: url('./images/nav.jpg') repeat-x scroll 0px -30px transparent;
+    }
+
+    .nav a{ padding-left:21px; padding-right:21px; line-height:30px; font-size:14px; color:#fff;}
+</style>
+<div class="nav">
+    <ul>
+        <li id="1"><a href="http://www.scs.gov.cn/">首页</a></li>
+        <li id="2"><a href="http://www.scs.gov.cn/gzdt/">工作动态</a></li>
+        <li id="3"><a href="http://www.scs.gov.cn/zcfg/">政策法规</a></li>
+        <li id="4"><a href="http://www.scs.gov.cn/ksly/">考试录用</a></li>
+        <li id="5"><a href="http://www.scs.gov.cn/khjl/">考核奖励</a></li>
+        <li id="6"><a href="http://www.scs.gov.cn/gwygl/">公务员管理</a></li>
+        <!--<li id="7"><a href="./zwgk/">政务公开</a></li>
+        <li id="8"><a href="./llwm/">联系我们</a></li>-->
+    </ul>
+</div>
+<script>
+    var id = "";
+    var isSelect = "1";
+    if(id=="工作动态"){
+        isSelect = 2;
+    }else if(id=="政策法规"){
+        isSelect = 3;
+    }else if(id=="考试录用"){
+        isSelect = 4;
+    }else if(id=="考核奖励"){
+        isSelect = 5;
+    }else if(id=="公务员管理"){
+        isSelect = 6;
+    }else if(id=="政务公开"){
+        isSelect = 7;
+    }else if(id=="联系我们"){
+        isSelect = 8;
+    }else {
+        isSelect = 1;
+    }
+    $(function(){
+
+        $("#"+isSelect).addClass("nav_h1");
+        $('.nav ul li').mouseover(function () {
+            $(this).addClass("nav_h");
+            $(this).stop().slideDown();
+        })
+        $('.nav ul li').mouseleave(function(){
+            var thisId = $(this).attr("id");
+            if(isSelect != thisId){
+                $(this).removeClass("nav_h");
+            }
+        })
+
+        $('.nav ul li').click(function(){
+            var thisId = $(this).attr("id");
+            if(isSelect != thisId){
+                $("#"+isSelect).removeClass("nav_h1");
+                $("#"+isSelect).removeClass("nav_h");
+                $(this).addClass("nav_h1");
+                isSelect = thisId;
+            }
+        })
+    });
+</script>
+<div class="main">
+    <div class="main_left">
+        <div class="main_left_ju">
+            <!--    <div class="main_left_ju_1" style=" margin-top:0px;">-->
+            <!--        <a href="./jzyzr/" target="_blank">局主要职责</a>-->
+            <!--    </div>-->
+            <!--    <div class="main_left_ju_1">-->
+            <!--        <a >局领导介绍</a>-->
+            <!--    </div>-->
+            <!--    <div class="main_left_ju_1nei" style='height:121px;'>-->
+            <!--        <ul>-->
+
+
+            <!--            <li class="juzhang"><span>局&nbsp;  长</span> <a style='margin-left: 12px; cursor:auto;'>徐启方</a></li>-->
+
+
+            <!--        </ul>-->
+            <!--    </div>-->
+
+            <!--<div class="main_left_ju_1">
+                <a >公务员精神</a>
+            </div>
+            <div class="main_left_ju_1nei2">
+                <ul>
+                    <li><a >热爱祖国&nbsp;&nbsp;&nbsp;&nbsp;忠于人民</a></li>
+                    <li><a >恪尽职守&nbsp;&nbsp;&nbsp;&nbsp;廉洁奉公</a></li>
+                    <li><a >求真务实&nbsp;&nbsp;&nbsp;&nbsp;开拓创新</a></li>
+                    <li><a >顾全大局&nbsp;&nbsp;&nbsp;&nbsp;团结协作</a></li>
+                </ul>
+            </div>-->
+            <div class="main_left_ju_1">
+                <a >公务员职业道德</a>
+            </div>
+            <div style="height:106px;" class="main_left_ju_1nei2">
+                <ul>
+                    <li><a >坚定信念</a><a >忠于国家</a></li>
+                    <li><a >服务人民</a><a >恪尽职守</a></li>
+                    <li><a >依法办事</a><a >公正廉洁</a></li>
+                </ul>
+            </div>
+        </div>
+        <style>
+
+            .main_left_button select {
+                background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+                height: 30px;
+                outline: medium none;
+                width: 202px;
+            }
+            .main_left_button {
+                cursor: pointer;
+                font-size: 12px;
+                height: 30px;
+                line-height: 30px;
+                margin-top: 5px;
+                width: 202px;
+                padding-left:0px;
+                background-image: url("");
+            }
+
+            .main_left_ju_1nei2{ height:141px;border:1px solid #d6d6d6; border-top:0px;}
+            .main_left_ju_1nei2 ul{ padding-left:12px; padding-right:12px; padding-top:10px;}
+            .main_left_ju_1nei2 li{ height:29px;}
+            .main_left_ju_1nei2 a{ font-family:'宋体'; font-size:12px; color:#2379ce; line-height:30px; font-weight:bold; padding-left:20px;}
+
+            .gw_main_le{ width:204px; height:186px; background:url(.//images/gw_mainr.jpg) no-repeat;}
+        </style>
+        <!--<div class="main_left_button">-->
+        <!--    <select onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">-->
+        <!--        <option selected>国务院部门网站</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mfa.gov.cn/">中华人民共和国外交部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mod.gov.cn/">中华人民共和国国防部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.ndrc.gov.cn">中华人民共和国国家发展和改革委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.moe.gov.cn">中华人民共和国教育部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.most.gov.cn">中华人民共和国科学技术部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.miit.gov.cn">中华人民共和国工业和信息化部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.seac.gov.cn">中华人民共和国国家民族事务委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mps.gov.cn">中华人民共和国公安部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mos.gov.cn">中华人民共和国监察部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mca.gov.cn">中华人民共和国民政部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.moj.gov.cn">中华人民共和国司法部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mof.gov.cn">中华人民共和国财政部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mohrss.gov.cn">中华人民共和国人力资源和社会保障部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mlr.gov.cn">中华人民共和国国土资源部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mep.gov.cn">中华人民共和国环境保护部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mohurd.gov.cn">中华人民共和国住房和城乡建设部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.moc.gov.cn">中华人民共和国交通运输部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mwr.gov.cn">中华人民共和国水利部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.moa.gov.cn/">中华人民共和国农业部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mofcom.gov.cn">中华人民共和国商务部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.mcprc.gov.cn">中华人民共和国文化部</option>-->
+        <!--        -->
+        <!--            <option value="http://www.nhfpc.gov.cn/">中华人民共和国卫生和计划生育委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.pbc.gov.cn">中国人民银行</option>-->
+        <!--        -->
+        <!--            <option value="http://www.audit.gov.cn">中华人民共和国审计署</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sasac.gov.cn">国务院国有资产监督管理委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.customs.gov.cn">中华人民共和国海关总署</option>-->
+        <!--        -->
+        <!--            <option value="http://www.chinatax.gov.cn">国家税务总局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.saic.gov.cn">国家工商行政管理总局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.aqsiq.gov.cn">国家质量监督检验检疫总局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.chinasarft.gov.cn">国家广播电影电视总局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.gapp.gov.cn">中华人民共和国新闻出版总署(版权局)</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sport.gov.cn">国家体育总局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.chinasafety.gov.cn">国家安全生产监督管理总局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sda.gov.cn/WS01/CL0001">国家食品药品监督管理总局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.stats.gov.cn">国家统计局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.forestry.gov.cn">国家林业局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sipo.gov.cn">国家知识产权局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cnta.gov.cn">国家旅游局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sara.gov.cn">国家宗教事务局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.counsellor.gov.cn">国务院参事室</option>-->
+        <!--        -->
+        <!--            <option value="http://www.ggj.gov.cn">国家机关事务管理局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.gqb.gov.cn">国务院侨务办办公室</option>-->
+        <!--        -->
+        <!--            <option value="http://www.hmo.gov.cn">国务院港澳事务办公室</option>-->
+        <!--        -->
+        <!--            <option value="http://www.chinalaw.gov.cn">国务院法制办公室</option>-->
+        <!--        -->
+        <!--            <option value="http://www.gwytb.gov.cn">国务院台湾事务办公室</option>-->
+        <!--        -->
+        <!--            <option value="http://www.scio.gov.cn">国务院新闻办公室</option>-->
+        <!--        -->
+        <!--            <option value="http://www.xinhuanet.com">新华社</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cas.cn">中国科学院</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cssn.cn">中国社会科学院</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cae.cn">中国工程院</option>-->
+        <!--        -->
+        <!--            <option value="http://www.drc.gov.cn">国务院发展研究中心</option>-->
+        <!--        -->
+        <!--            <option value="http://www.nsa.gov.cn">国家行政学院</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cea.gov.cn">中国地震局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cma.gov.cn">中国气象局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cbrc.gov.cn">中国银行业监督管理委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.csrc.gov.cn">中国证券监督管理委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.circ.gov.cn">中国保险监督委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.serc.gov.cn">国家电力监管委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.ssf.gov.cn">全国社会保障基金理事会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.nsfc.gov.cn">国家自然科学基金委员会</option>-->
+        <!--        -->
+        <!--            <option value="http://www.gjxfj.gov.cn">国家信访局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.chinagrain.gov.cn">国家粮食局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.tobacco.gov.cn">国家烟草专卖局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.safea.gov.cn">国家外国专家局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.scs.gov.cn">国家公务员局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.soa.gov.cn">国家海洋局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sbsm.gov.cn">国家测绘地理信息局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.post.gov.cn">国家邮政局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sach.gov.cn">国家文物局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.satcm.gov.cn">国家中医药管理局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.safe.gov.cn/">国家外汇管理局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.chinasafety.gov.cn/zhuantipindao/meikuanganquan.htm">国家煤矿安全监察局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.saac.gov.cn/index.htm">国家档案局</option>-->
+        <!--        -->
+        <!--            <option value="http://www.3g.gov.cn">国务院三峡工程建设委员会办公室</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cpad.gov.cn">国务院扶贫开发领导小组办公室</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cdpf.org.cn">中国残疾人联合会</option>-->
+        <!--        -->
+        <!--    </select>-->
+        <!--</div>-->
+        <!--<div class="main_left_button">-->
+        <!--    <select onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">-->
+        <!--        <option selected>人社系统</option>-->
+        <!--        -->
+        <!--            <option value="http://www.bjrbj.gov.cn">北京</option>-->
+        <!--        -->
+        <!--            <option value="http://www.tj.lss.gov.cn/ecdomain/framework/tj/index.jsp">天津</option>-->
+        <!--        -->
+        <!--            <option value="http://www.hgrsw.gov.cn/index.html">河北</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sx.hrss.gov.cn">山西</option>-->
+        <!--        -->
+        <!--            <option value="http://www.nm12333.cn">内蒙古</option>-->
+        <!--        -->
+        <!--            <option value="http://www.ln.lss.gov.cn">辽宁</option>-->
+        <!--        -->
+        <!--            <option value="http://hrss.jl.gov.cn">吉林</option>-->
+        <!--        -->
+        <!--            <option value="http://www.hl.lss.gov.cn">黑龙江</option>-->
+        <!--        -->
+        <!--            <option value="http://www.12333sh.gov.cn">上海</option>-->
+        <!--        -->
+        <!--            <option value="http://www.jshrss.gov.cn">江苏</option>-->
+        <!--        -->
+        <!--            <option value="http://www.zjhrss.gov.cn">浙江</option>-->
+        <!--        -->
+        <!--            <option value="http://www.ah.hrss.gov.cn">安徽</option>-->
+        <!--        -->
+        <!--            <option value="http://www.fjlss.gov.cn">福建</option>-->
+        <!--        -->
+        <!--            <option value="http://hrss.jiangxi.gov.cn">江西</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sdhrss.gov.cn/">山东</option>-->
+        <!--        -->
+        <!--            <option value="http://www.ha.hrss.gov.cn">河南</option>-->
+        <!--        -->
+        <!--            <option value="http://www.hb.hrss.gov.cn">湖北</option>-->
+        <!--        -->
+        <!--            <option value="http://www.hnrst.gov.cn/web/rltzww/index.html">湖南</option>-->
+        <!--        -->
+        <!--            <option value="http://www.gdhrss.gov.cn">广东</option>-->
+        <!--        -->
+        <!--            <option value="http://www.gx.lss.gov.cn">广西</option>-->
+        <!--        -->
+        <!--            <option value="http://hi.lss.gov.cn">海南</option>-->
+        <!--        -->
+        <!--            <option value="http://www.cqhrss.gov.cn">重庆</option>-->
+        <!--        -->
+        <!--            <option value="http://www.sc.hrss.gov.cn">四川</option>-->
+        <!--        -->
+        <!--            <option value="http://gz.hrss.gov.cn">贵州</option>-->
+        <!--        -->
+        <!--            <option value="http://www.ynhrss.gov.cn">云南</option>-->
+        <!--        -->
+        <!--            <option value="http://www.xz.hrss.gov.cn">西藏</option>-->
+        <!--        -->
+        <!--            <option value="http://www.shaanxihrss.gov.cn">陕西</option>-->
+        <!--        -->
+        <!--            <option value="http://www.gs.lss.gov.cn">甘肃</option>-->
+        <!--        -->
+        <!--            <option value="http://www.qhhrss.gov.cn">青海</option>-->
+        <!--        -->
+        <!--            <option value="http://www.nxhrss.gov.cn">宁夏</option>-->
+        <!--        -->
+        <!--            <option value="http://www.xjrs.gov.cn">新疆</option>-->
+        <!--        -->
+        <!--            <option value="http://rsj.xjbt.gov.cn/">兵团</option>-->
+        <!--        -->
+        <!--    </select>-->
+        <!--</div>-->
+        <div class="main_left_button">
+            <!--<a href="http://www.scs.gov.cn/zqyj/"><img src="./images/zqyj0909.jpg" /></a>-->
+        </div>
+
+        <!--<div class="gw_main_le">
+        </div>-->
+    </div>
+    <div class="main_left1" style='margin-top: -7px;'>
+        <!--
+        <div class="main_left1_topyi">
+               <!--<div class="main_left1_top_gnu" style="width:592px">
+               <div class="main_left1_topa" id='main_left1_topa'>
+                 <div id="demo0">
+                   <div id="demo1">
+
+                    </div>
+                    <div id="demo2"></div>
+                  </div>
+                </div>
+              </div>
+
+        <div class="main_left1_lu"><a id="yx_style_nav" href="http://wza.scs.gov.cn/" style="color:#fff;" target="_blank">
+
+             <div class="main_left1_lu"><a id="yx_style_nav" href="http://wza.scs.gov.cn/" style="color:#fff;" target="_blank">
+                无障碍通道></a>
+              </div>
+            </div>
+        -->
+        <div class="main_left1_main_top">
+            <div class="main_left1_main_top_right" style="width: 100%;"> <span><a href="./gzdt/" style="color:#9a9a9a;" target="_blank">更多〉</a></span>
+                <a href="./gzdt/" target="_blank">工作动态</a>
+            </div>
+        </div>
+        <div class="main_left1_mainx">
+            <div class="main_left1_mainx_right" style="width: 98%;float: none;padding-left: 11px;">
+                <ul>
+
+                    <li><span>2022-04-01</span><a href="http://www.scs.gov.cn/gzdt/202204/t20220401_16404.html" target="_blank">推进公务员工作高质量发展——全国公务员工作推进会发言摘登</a></li>
+
+                    <li><span>2022-03-15</span><a href="http://www.scs.gov.cn/gzdt/202203/t20220315_16405.html" target="_blank">中组部召开全国公务员工作推进会</a></li>
+
+                    <li><span>2021-04-14</span><a href="http://www.scs.gov.cn/gzdt/202104/t20210414_16229.html" target="_blank">努力打造一支高素质专业化公务员队伍</a></li>
+
+                    <li><span>2021-03-15</span><a href="http://www.scs.gov.cn/gzdt/202103/t20210315_16224.html" target="_blank">中组部召开全国公务员工作推进会</a></li>
+
+                    <li><span>2020-04-28</span><a href="http://www.scs.gov.cn/gzdt/202004/t20200428_16208.html" target="_blank">中组部召开全国公务员工作推进会</a></li>
+
+                    <li><span>2020-04-28</span><a href="http://www.scs.gov.cn/gzdt/202004/t20200428_16207.html" target="_blank">全国公务员工作推进会发言摘登</a></li>
+
+                    <li><span>2018-12-03</span><a href="http://www.scs.gov.cn/gzdt/201812/t20181203_12083.html" target="_blank">2019年度中央机关公开遴选和公开选调公务员公告</a></li>
+
+                    <li><span>2018-07-31</span><a href="http://www.scs.gov.cn/gzdt/201807/t20180731_12079.html" target="_blank">新疆叶城公务员享用“廉政套餐”</a></li>
+
+                    <li><span>2018-07-31</span><a href="http://www.scs.gov.cn/gzdt/201807/t20180731_12078.html" target="_blank">山西临汾尧都区创新模式抓实公务员培训</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="main_left1_cente_top"> <a href="./zcfg/" target="_blank">更多〉</a> <span><a href="./zcfg/" style="color: #FFF;float: left;padding-left: 10px;font-size: 14px;line-height: 28px;" target="_blank">政策法规</a></span> </div>
+        <div class="zhengcefagui">
+            <ul>
+
+                <li><span>2022-12-28</span><a href="http://www.scs.gov.cn/zcfg/202212/t20221228_16409.html" target="_blank">公务员申诉规定</a></li>
+
+                <li><span>2021-10-14</span><a href="http://www.scs.gov.cn/zcfg/202110/t20211014_16343.html" target="_blank">公务员录用违规违纪行为处理办法</a></li>
+
+                <li><span>2021-10-14</span><a href="http://www.scs.gov.cn/zcfg/202110/t20211014_16344.html" target="_blank">公务员录用考察办法（试行）</a></li>
+
+            </ul>
+        </div>
+        <div class="main_left1_cente_top"> <a href="./khjl/" target="_blank">更多〉</a> <span><a href="http://www.scs.gov.cn/khjl/" style="color: #FFF;float: left;padding-left: 10px;font-size: 14px;line-height: 28px;" target="_blank">考核奖励</a></span> </div>
+        <div class="zhengcefagui">
+            <ul>
+
+                <li><span>2018-06-06</span><a href="http://www.scs.gov.cn/khjl/gjbzjl/201806/t20180606_12066.html" target="_blank">改革开放四十周年表彰工作相关表格</a></li>
+
+                <li><span>2018-04-17</span><a href="http://www.scs.gov.cn/khjl/gjbzjl/201804/t20180417_12050.html" target="_blank">关于对拟表彰的全国工会系统先进集体、劳动模范和先进工作者进行公示的公告</a></li>
+
+                <li><span>2018-03-01</span><a href="http://www.scs.gov.cn/khjl/gjbzjl/201803/t20180301_12023.html" target="_blank">关于对拟表彰的全国煤炭工业先进集体劳动模范和先进工作者进行公示的公告</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="main_right">
+        <form name="searchform" action="/was5/web/search?channelid=262747" method="get" onsubmit="return checkForm()" >
+            <div class="seach">
+                <input class="btn" type="submit" value="" />
+                <input class="text" type="text" name="searchword" value="" id="searchword" />
+                <input type="hidden" name="perpage" value="" />
+                <input type="hidden" name="templet" value="" />
+                <input type="hidden" name="token" value="" />
+                <input type="hidden" name="channelid" value="262747" />
+
+            </div>
+        </form>
+
+        <div class="kaoshiluyong">
+            <h3>考试录用</h3>
+            <!--<div class="img"><a href="http://bm.scs.gov.cn/pp/gkweb/core/web/ui/business/home/gkhome.html" target="_blank"><img src='./images/2020klzt.jpg' /></a></div>-->
+            <!--<div class="img"><a href="http://bm.scs.gov.cn/kl2021" target="_blank"><img src='./images/2021klzt.jpg' /></a></div>-->
+            <!--2022-10-14--><!-- <div class="img"><a href="http://bm.scs.gov.cn/kl2022" target="_blank"><img src="./images/2022klzt.jpg" /></a></div>-->
+            <!--2024-10-12-->
+            <div class="img"><a href="http://www.scs.gov.cn/ydy/" target="_blank"><img src="http://www.scs.gov.cn/images/2025klzt.png" /></a></div>
+
+            <!--<div class="img1"><a href="./ksly/lnksly/" target="_blank"><img src='./images/20150709_1.jpg' /><img src="./images/4.jpg" /></a></div>-->
+            <!--<div class="img1"><a href="./ksly/gdfzkxx/" target="_blank"><img src="./images/5.jpg" /></a></div>-->
+        </div>
+
+        <div class="kaoshiluyong" >
+            <h3>公开遴选和公开选调</h3>
+            <!--2024-10-12-->
+            <div class="img1"><a href="http://subb.scs.gov.cn/lx2025" target="_blank"><img src="http://www.scs.gov.cn/images/gklx2025.png" /></a></div>
+        </div>
+
+        <div class="kaoshiluyong">
+            <h2>公务员管理</h2>
+            <div class="img"><a href="./gwygl/zsgl/" target="_blank"><img src="http://www.scs.gov.cn/images/10.jpg" /></a></div>
+            <!--<div class="img"><a href="./gwygl/gwykh/" target="_blank"><img src="./images/17.jpg" /></a></div>-->
+            <div class="img"><a href="./khjl/gwykhjl/" target="_blank"><img src='http://www.scs.gov.cn/images/20150709_3.jpg' /><!--<img src="./images/18.jpg" />--></a></div>
+            <!--<div class="img"><a href="./gwygl/gwypx/" target="_blank"><img src="./images/11.jpg" /></a></div>-->
+            <!--<div class="img"><a href="./gwyts/" target="_blank"><img src="15_1.jpg" /></a></div>-->
+
+            <!--<div class="img1"><a href="./gwygl/czgl/" target="_blank"><img src="./images/13.jpg" /></a></div>-->
+            <div class="img"><a href="./khjl/gjbzjl/" target="_blank"><img src='http://www.scs.gov.cn/images/20150709.png' /><!--<img src="./images/16.jpg" />--></a></div>
+            <div class="img"><a href="./khjl/pbdbbz/" target="_blank"><img src="http://www.scs.gov.cn/images/14.jpg" /></a></div>
+            <div class="img1"><a href="./gwygl/gwyjd/" target="_blank"><img src='http://www.scs.gov.cn/images/20150709_2.jpg' /><!--<img src="./images/12.jpg" />--></a></div>
+        </div>
+        <!--<div class="gjimg"></div>-->
+    </div>
+    <div class="clear"></div>
+</div>
+
+<style>
+    #imgConac{position:absolute;left:323px;top:0px;}
+    .footer{position:relative;}
+</style>
+
+<div class="footer">
+
+    <table>
+        <tr>
+            <td width="400">
+                <div style=" width:400px; text-align:right;">
+                    <script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/33/000/0000/40672161/CA330000000406721610001.js' type='text/javascript'%3E%3C/script%3E"));</script>
+
+                </div>
+
+            </td>
+            <td width="200">
+                <div style="float:left; text-align:center; width:200px;">
+                    <P>版权所有：国家公务员局</P>
+                    <P>网站所有：国家公务员局</P>
+                    <P><a href="https://beian.miit.gov.cn" target="_blank" style="color: #fff">京ICP备09079694号-6</a></P>
+                </div>
+
+            </td>
+            <td width="400">
+                <!--
+                <div style="float:left; text-align:left; width:400px;">
+                <script id="_jiucuo_" sitecode='bm66000001' src='http://pucha.kaipuyun.cn/exposure/jiucuo.js'></script>
+                </div>
+                -->
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+
+
+
+<!-- 删除飘红要删除下面的/div  -->
+<!--</div>-->
+
+</body>
+</html>

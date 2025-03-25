@@ -2,6 +2,7 @@ package com.itheima.a01staticdemo1;
 
 public class StudentTest {
     public static void main(String[] args) {
+        //!!!!!!!
         //静态变量可以直接用类名调用赋值
         Student.teacherName = "王五老师";
         Student s1 = new Student();

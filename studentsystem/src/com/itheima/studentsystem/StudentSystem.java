@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentSystem {
+    private static final String ADD_STUDENT = "1";
+    private static final String DELETE_STUDENT = "2";
+    private static final String CHANGE_STUDENT = "3";
+    private static final String SEARCH_STUDENT = "4";
+    private static final String EXIT = "5";
     public static void main() {
         //！！！！！！！！！！！！！！
         //项目注意点，在主方法中使用while(true)循环，其内使用switch根据不同输入调用不同方法
@@ -14,7 +19,20 @@ public class StudentSystem {
         //二：System.exit(0);直接停止Java虚拟机的运行，相当于直接关闭程序
         ArrayList<Student> list = new ArrayList<>();
         while (true) {
+            //switch新特性
             switch (startMenu()) {
+                case ADD_STUDENT -> addStudent(list);
+                case DELETE_STUDENT -> deleteStudent(list);
+                case CHANGE_STUDENT -> changeStudent(list);
+                case SEARCH_STUDENT -> searchStudent(list);
+                case EXIT -> {
+                    System.out.println("退出");
+                    System.exit(0);//停止虚拟机运行
+                }
+                default -> System.out.println("输入错误，请重新输入");
+                //用不着startMenu();
+            }
+            /*switch (startMenu()) {
                 case "1":
                     addStudent(list);
                     break;
@@ -34,7 +52,7 @@ public class StudentSystem {
                     System.out.println("输入错误，请重新输入");
                     startMenu();
                     break;
-            }
+            }*/
         }
 
     }

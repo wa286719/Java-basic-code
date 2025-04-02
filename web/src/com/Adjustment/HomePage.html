@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+  <title>全国硕士生招生调剂意向采集系统</title>
+  <link rel="dns-prefetch" href="https://axvert.chsi.com.cn">
+  <link rel="dns-prefetch" href="https://t1.chei.com.cn">
+  <link rel="dns-prefetch" href="https://t2.chei.com.cn">
+  <link rel="dns-prefetch" href="https://t3.chei.com.cn">
+  <link rel="dns-prefetch" href="https://t4.chei.com.cn">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="shortcut icon" type="image/x-icon" href="https://t3.chei.com.cn/yz/favicon.ico">
+  <link rel="stylesheet" href="https://t1.chei.com.cn/common/ch/chicon/iconfont.css">
+  <script type="text/javascript" src="https://t1.chei.com.cn/common/js/vue/2.6.10/vue.min.js"></script>
+  <link rel="stylesheet" href="https://t2.chei.com.cn/yz/sytj/assets/pc/css/app-1.0.0.css">
+  <style>
+    .ivu-form-item-content .tip + .tip {
+      margin-top: 14px;
+    }
+  </style>
+  <!-- 页面中额外css引入 -->
+
+  <script type="text/javascript">
+    // 百度统计
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3916ecc93c59d4c6e9d954a54f37d84c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100524-7"></script>
+  <script>
+    function gaTrackerOutboundLink(ele,eventCategory,eventAction,eventLabel){
+      gtag('event', eventAction, {
+        'event_category': eventCategory,
+        'event_label': eventLabel
+      });
+      return true;
+    };
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-100524-7', {'sample_rate': 5});
+  </script>
+</head>
+<body>
+<div id="appLoading" style="display: none;">
+  <div class="spin-loading">
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+  </div>
+</div>
+
+<div id="app" v-cloak>
+  <div class="header-wrapper">
+    <div class="header">
+      <div class="logo-con">
+        <div class="logo"></div>
+        <h1>全国硕士生招生调剂意向采集系统</h1>
+      </div>
+      <div class="user-con">
+        <div class="item">
+          <a href="/" target="_blank">研招网首页</a>
+          |
+          <a href="/help/" target="_blank">帮助中心</a>
+          |
+          <Dropdown>
+            <a href="javascript:;">
+              <span class="user-name">王*</span>
+              <i class="ch-icon ch-icon-arrow-down"></i>
+            </a>
+            <Dropdown-Menu slot="list">
+              <Dropdown-Item>
+                <a href="/user/" target="_blank">用户中心</a>
+              </Dropdown-Item>
+              <Dropdown-Item>
+                <a href="https://account.chsi.com.cn/account/account!show" target="_blank">账号信息</a>
+              </Dropdown-Item>
+            </Dropdown-Menu>
+          </Dropdown>
+          |
+          <a href="/sytj/logout/">退出</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-wrapper">
+    <div class="nav border">
+      <template v-for="item in navList">
+        <template v-if="item.subNavList && item.subNavList.length > 0">
+          <div class="nav-item">
+            <div class="nav-title">{{item.title}}</div>
+            <ul class="nav-list">
+              <template v-for="subItem in item.subNavList">
+                <li>
+                  <a :class="subItem.key === active ? 'selected' : ''" :href="subItem.href">{{subItem.title}}</a>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </template>
+        <template v-else>
+          <div class="nav-item">
+            <a :class="item.key === active ? 'selected' : ''" :href="item.href">{{item.title}}</a>
+          </div>
+        </template>
+      </template>
+    </div>
+  </div>
+  <div class="main-wrapper">
+    <div class="index-top-wrapper">
+      <div class="main index-tjyx-warning">
+        <Alert class="tjyx-warning" type="warning">
+          {{tjyxTips}}
+        </Alert>
+      </div>
+      <div class="index-top">
+        <div class="left tjyx">
+          <div class="img-con">
+            <img src="https://t2.chei.com.cn/yz/sytj/assets/pc/images/index-tjyx-banner.svg" alt="调剂意向">
+            <div class="img-title">系统介绍</div>
+          </div>
+          <div class="tjyx-value-con">
+            <ul>
+              <li>
+                <div class="title">
+                  <span>查询余额</span>
+                </div>
+                <div class="content">考生可在调剂服务系统开通前，了解招生单位发布的调剂意向余额情况。</div>
+              </li>
+              <li>
+                <div class="title">
+                  <span>一键转入</span>
+                </div>
+                <div class="content">考生可在调剂服务系统开通24小时内，在满足条件的前提下，将调剂意向一键转为调剂志愿。</div>
+              </li>
+              <li>
+                <div class="title">
+                  <span>沟通保障</span>
+                </div>
+                <div class="content">考生和招生单位可就调剂意向提前预选、双向沟通。</div>
+              </li>
+              <li>
+                <div class="title">
+                  <span>范围更广</span>
+                </div>
+                <div class="content">考生适用的范围比调剂服务系统更广，最多可填写10个平行调剂意向。</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="right">
+          <div class="item">
+            <div class="img-con">
+              <img src="https://t1.chei.com.cn/common/ewm/images/chsi.jpg">
+            </div>
+            <div class="value-con">
+              <div class="title">学信网公众号</div>
+              <div class="con">关注学信网公众号并绑定微信账号，及时接收重要消息提醒</div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-con">
+              <img src="https://t1.chei.com.cn/common/ewm/images/yz.jpg">
+            </div>
+            <div class="value-con">
+              <div class="title">研招网</div>
+              <div class="con">研招关键节点提醒及相关信息查询</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="tj_usable"  class="index-tjyx-btn-con">
+        <i-button type="primary" ghost shape="circle" size="large" :to="sytjNavList[0].href">
+          复试调剂服务系统
+          <i class="ch-icon ch-icon-arrow-dropright" style="margin-left: 4px;"></i>
+        </i-button>
+      </div>
+    </div>
+    <div class="index-bottom-wrapper">
+      <div class="index-bottom" style="padding-top: 10px;">
+        <div class="font-16">注意：</div>
+        <div class="font-p-14 c-deepgrey">
+          <p>
+            1. 本调剂意向采集系统与调剂服务系统有本质的区别，不等同于调剂服务系统。
+            <br />
+            2. 申请调剂考生应符合招生管理规定确定的<a :href="jybtjzcUrl" target="_blank">调剂条件</a>。
+            <br />
+            3. 不符合招生单位调入专业学科门类要求、初试科目要求或其他调剂申请条件的考生，将无法填写相关志愿。
+            <br />
+            4. 查询余额时，招生单位、专业至少填写一项。
+            <br />
+            5. 在允许填写调剂意向的时间内，一位考生最多可填写10个平行调剂意向，并且提交成功后不可取消或更改。
+            <br />
+            6. 调剂服务系统开通后，调剂意向采集服务系统的查询调剂意向余额信息和填写调剂意向功能将关闭。考生可以在调剂服务系统查询余额信息。
+            <br />
+            7. 调剂服务系统开通24小时内，在满足条件的前提下，考生可将调剂意向转为调剂服务系统中的调剂志愿，转成功后不可取消或更改。
+            <br />
+            8. 调剂服务系统开通24小时后，转为调剂志愿的功能将关闭。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-wrapper">
+    <div class="footer">
+      <div class="footer-units">
+        主办单位：<a href="https://chesicc.chsi.com.cn/" target="_blank">教育部学生服务与素质发展中心</a><br>
+        Copyright © 2003-<span>2025</span> <a href="https://www.chsi.com.cn/" target="_blank">学信网</a> All Rights Reserved<br>
+        <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">京ICP备19004913号-1</a>
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010202009747" target="_blank" rel="noopener noreferrer">
+          <img src="https://t1.chei.com.cn/chsi/images/jgwab.svg" style="vertical-align: middle; margin-bottom: 2px; margin-left: 8px;">
+          京公网安备11010202009747号
+        </a>
+      </div>
+      <div class="footer-msg">
+        客服热线：010-67410388<br>
+        客服邮箱：kefu@chsi.com.cn
+      </div>
+    </div>
+  </div>
+
+  <div class="right-float-con">
+    <a class="help" href="/help/" target="_blank">帮助中心</a>
+    <a class="jqr" href="https://kl.chsi.com.cn/robot/index.action?system=yz_wb" target="_blank"></a>
+    <div class="right-ewm-con">
+      <div class="item-iconfont">
+        <i class="ch-icon ch-icon-ewm"></i>
+      </div>
+      <div class="item-detail">
+        <div class="item">
+          <div class="left">
+            <img src="https://t1.chei.com.cn/common/ewm/images/chsi.jpg">
+          </div>
+          <div class="right">
+            <div class="title">学信网公众号</div>
+            <div class="con">关注学信网公众号并绑定微信账号，及时接收重要消息提醒</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="left">
+            <img src="https://t1.chei.com.cn/common/ewm/images/yz.jpg">
+          </div>
+          <div class="right">
+            <div class="title">研招网</div>
+            <div class="con">研招关键节点提醒及相关信息查询</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <back-Top></back-Top>
+</div>
+
+<script type="text/javascript" src="https://t3.chei.com.cn/common/ch/browser/not-ie.min.js"></script>
+<script type="text/javascript" src="https://t3.chei.com.cn/common/js/api-1.0.1.js"></script>
+<script type="text/javascript" src="https://t3.chei.com.cn/common/js/lodash.min.js"></script>
+<script type="text/javascript" src="https://t3.chei.com.cn/common/js/vue-plugins/moment.min.js"></script>
+<script>
+  api.pollingOptions = {
+    resType: 'json',
+    taskUrl: '/sytj/ajaxRs', //默认：''，不会进入轮询
+    pollingUrl: '/sytj/asynProgress.do', //默认：''，不会进入轮询
+    pollingLimit: 10, // 请求的最大次数，默认：10次
+    pollingDelay: 1000, // 正常轮询时，请求延迟毫秒数，默认：1000毫秒
+    delayGaps: 300, // 轮询请求间隔递增毫秒数，默认：0毫秒（建议不要超过1000）
+  };
+  // api 统一配置
+  api.axiosConfig = {
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest', //普通form 表单提交方式
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }, // 其他为axios的配置-设置headers
+    timeout: 60000 // 其他为axios的配置-请求超时时间
+  };
+  var openTime = '2025年4月8日';
+  var wsdcUrl = 'https://vote.chsi.com.cn/ac/answer/one/voteSave.mvc?id=mzbuygj1cszt9zc7';
+  var zycpUrl = 'https://xz.chsi.com.cn/cp/sph/cover.do?sphSurveyId=f4ediwycn6qj8nm4';
+  var tjyxTips = '调剂意向采集服务系统仅用于招生单位提前掌握考生调剂意愿情况。参加调剂的考生可在调剂服务系统开通24小时内将调剂意向转为调剂志愿，也可在调剂服务系统中重新填报调剂志愿。';
+  var jybtjzcUrl = 'https://yz.chsi.com.cn/kyzx/tjzd/202503/20250327/2293354659.html';
+  var static = false;
+  var sytjNavList = [
+    {
+      href: '/sytj/tj/',
+      key: 'index',
+      title: '首页'
+    },
+    {
+      href: '/sytj/tj/yzytz.action',
+      key: 'yzytz',
+      title: '一志愿复试待录取通知'
+    },
+    {
+      title: '调剂',
+      subNavList: [
+        {
+          href: '/sytj/tj/qecx.action',
+          key: 'qecx',
+          title: '计划余额查询'
+        },
+        {
+          href: '/sytj/tj/tjzy.action',
+          key: 'tjzy',
+          title: '申请调剂'
+        },
+        {
+          href: '/sytj/tj/fstz.action',
+          key: 'fstz',
+          title: '复试通知'
+        },
+        {
+          href: '/sytj/tj/dlqtz.action',
+          key: 'dlqtz',
+          title: '待录取通知'
+        }
+      ]
+    },
+    {
+      href: '/sytj/tj/cjxx.action',
+      key: 'cjxx',
+      title: '初试成绩'
+    }
+  ];
+  var tjyxNavList = [
+    {
+      href: '/sytj/tjyx/',
+      key: 'index',
+      title: '首页'
+    },
+    {
+      title: '意向',
+      subNavList: [
+        {
+          href: '/sytj/tjyx/qecx.action',
+          key: 'qecx',
+          title: '调剂意向余额查询'
+        },
+        {
+          href: '/sytj/tjyx/tjzy.action',
+          key: 'tjzy',
+          title: '调剂意向'
+        }
+      ]
+    },
+    {
+      href: '/sytj/tjyx/cjxx.action',
+      key: 'cjxx',
+      title: '初试成绩'
+    }
+  ];
+  var xxfsList = [
+    {
+      code: '1',
+      name: '全日制'
+    },
+    {
+      code: '2',
+      name: '非全日制'
+    }
+  ];
+  var tyList = [
+    {
+      code: 'JF',
+      name: '普通计划'
+    },
+    {
+      code: 'ZX',
+      name: '退役大学生计划'
+    }
+  ];
+  var tyjfList = [
+    {
+      code: 'JF',
+      name: '普通计划'
+    }
+  ];
+  var zxjhList = [
+    {
+      code: '0',
+      name: '普通计划'
+    },
+    {
+      code: '4',
+      name: '少数民族骨干计划'
+    },
+    {
+      code: '7',
+      name: '退役大学生计划'
+    }
+  ];
+  var sfList = [
+    {
+      code: '1',
+      name: '是'
+    },
+    {
+      code: '0',
+      name: '否'
+    }
+  ];
+  var ssList = [
+    {
+      'code': '1',
+      'name': '一区',
+      'children':
+              [
+                {'code': '11', 'name': '北京'},
+                {'code': '12', 'name': '天津'},
+                {'code': '13', 'name': '河北'},
+                {'code': '14', 'name': '山西'},
+                {'code': '21', 'name': '辽宁'},
+                {'code': '22', 'name': '吉林'},
+                {'code': '23', 'name': '黑龙江'},
+                {'code': '31', 'name': '上海'},
+                {'code': '32', 'name': '江苏'},
+                {'code': '33', 'name': '浙江'},
+                {'code': '34', 'name': '安徽'},
+                {'code': '35', 'name': '福建'},
+                {'code': '36', 'name': '江西'},
+                {'code': '37', 'name': '山东'},
+                {'code': '41', 'name': '河南'},
+                {'code': '42', 'name': '湖北'},
+                {'code': '43', 'name': '湖南'},
+                {'code': '44', 'name': '广东'},
+                {'code': '50', 'name': '重庆'},
+                {'code': '51', 'name': '四川'},
+                {'code': '61', 'name': '陕西'}
+              ]
+    },
+    {
+      'code': '2',
+      'name': '二区',
+      'children':
+              [
+                {'code': '15', 'name': '内蒙古'},
+                {'code': '45', 'name': '广西'},
+                {'code': '46', 'name': '海南'},
+                {'code': '52', 'name': '贵州'},
+                {'code': '53', 'name': '云南'},
+                {'code': '54', 'name': '西藏'},
+                {'code': '62', 'name': '甘肃'},
+                {'code': '63', 'name': '青海'},
+                {'code': '64', 'name': '宁夏'},
+                {'code': '65', 'name': '新疆'}
+              ]
+    }
+  ];
+  function checkSpecial(str) {
+    var reg = /^[^@\/\'\\\"#$%&\^\*\<]+$/;
+    if (reg.test(str)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  //转化textarea
+  function getFormatCode(strValue){
+    return strValue.replace(/<br\/>/g,"\r\n").replace(/<br>/g,"\r\n").replace(/\n\n/g,"\n");
+  }
+  // 校验
+  function validateAllMsg(byny, xlm, xwm, bkzydm) {
+    var err = {
+      type: '一般', //错误程度 一般严重
+      list: []
+    };
+    var zsnd = 2025;
+    var d_byny = moment(byny, 'YYYYMMDD').toDate();
+    if (
+            bkzydm == '125100' ||
+            bkzydm == '125200' ||
+            bkzydm == '125602' ||
+            bkzydm == '045101' ||
+            bkzydm == '045203' ||
+            bkzydm == '125601' ||
+            bkzydm == '125400'
+    ) {
+      if (xwm == '1' || xwm == '2') {
+      } else {
+        if (xlm == '1') {
+          var nx = 2;
+          var s_3 = zsnd - nx + '-08-31';
+          var s_4 = zsnd - nx + '-12-31';
+          var d_3 = new Date(s_3.replace('-', '/').replace('-', '/'));
+          var d_4 = new Date(s_4.replace('-', '/').replace('-', '/'));
+          if (d_byny <= d_3) {
+            //通过
+          } else if (d_byny > d_3 && d_byny <= d_4) {
+            //0831-1231
+            //提示
+            err.list.push('入学前应毕业满' + nx + '年');
+          } else {
+            //after(d_4)
+            //严重
+          }
+        } else if (xlm == '2') {
+          var nx = 3;
+          var s_3 = zsnd - nx + '-08-31';
+          var s_4 = zsnd - nx + '-12-31';
+          var d_3 = new Date(s_3.replace('-', '/').replace('-', '/'));
+          var d_4 = new Date(s_4.replace('-', '/').replace('-', '/'));
+          if (d_byny <= d_3) {
+            //通过
+          } else if (d_byny > d_3 && d_byny <= d_4) {
+            //0831-1231
+            //提示
+            err.list.push('入学前应毕业满' + nx + '年');
+          } else {
+            //after(d_4)
+            //严重
+          }
+        } else if (xlm == '3' || xlm == '4') {
+          var nx = 5;
+          var s_3 = zsnd - nx + '-08-31';
+          var s_4 = zsnd - nx + '-12-31';
+          var d_3 = new Date(s_3.replace('-', '/').replace('-', '/'));
+          var d_4 = new Date(s_4.replace('-', '/').replace('-', '/'));
+          if (d_byny <= d_3) {
+            //通过
+          } else if (d_byny > d_3 && d_byny <= d_4) {
+            //0831-1231
+            //提示
+            err.list.push('入学前应毕业满' + nx + '年');
+          } else {
+            //after(d_4)
+            //严重
+          }
+        }
+      }
+    } else if (bkzydm == '125300' || bkzydm == '125500' || bkzydm == '125700') {
+      if (xwm == '1' || xwm == '2') {
+      } else {
+        if (xlm == '4') {
+          var nx = 2;
+          var s_3 = zsnd - nx + '-08-31';
+          var s_4 = zsnd - nx + '-12-31';
+          var d_3 = new Date(s_3.replace('-', '/').replace('-', '/'));
+          var d_4 = new Date(s_4.replace('-', '/').replace('-', '/'));
+          if (d_byny <= d_3) {
+            //通过
+          } else if (d_byny > d_3 && d_byny <= d_4) {
+            //0831-1231
+            //提示
+            err.list.push('入学前应毕业满' + nx + '年');
+          } else {
+            //after(d_4)
+            //严重
+          }
+        }
+      }
+    } else if (bkzydm == '125600' || bkzydm == '125603' || bkzydm == '125604') {
+      if (xwm == '1' || xwm == '2') {
+      } else {
+        if (xlm == '4') {
+          var nx = 2;
+          var s_3 = zsnd - nx + '-08-31';
+          var s_4 = zsnd - nx + '-12-31';
+          var d_3 = new Date(s_3.replace('-', '/').replace('-', '/'));
+          var d_4 = new Date(s_4.replace('-', '/').replace('-', '/'));
+          if (d_byny <= d_3) {
+            //通过
+          } else if (d_byny > d_3 && d_byny <= d_4) {
+            //0831-1231
+            //提示
+            err.list.push('入学前应毕业满' + nx + '年');
+          } else {
+            //after(d_4)
+            //严重
+          }
+        }
+      }
+    }
+    return err;
+  }
+
+</script>
+<script type="text/javascript" src="https://t2.chei.com.cn/common/vue-plugins/iview4.7.0/js/iview.min.js"></script>
+<script type="text/javascript" src="https://t3.chei.com.cn/yz/sytj/assets/pc/js/app.js"></script>
+<!-- 页面中额外js引入 -->
+
+<!-- 引入脚本 -->
+<script type="text/javascript">
+  var mixin = {
+    data:function () {
+      return {
+        active: 'index',
+        tj_usable: false
+      }
+    }
+  };
+</script>
+<script type="text/javascript">
+  api.errorCallback = function (code, msg) {
+    // 当其他错误发生时，弹出提示层
+    setTimeout(function () {
+      iview.Modal.error({
+        title: '提示',
+        content: msg
+      });
+    }, 500);
+  };
+
+  iview.Message.config({
+    duration: 5
+  });
+
+  var vmMain = new Vue({
+    el: '#app',
+    mixins: typeof mixin != 'undefined' ? [mixin] : {},
+    data: function () {
+      return {
+        curSystem: "tjyx",
+        sqtjModal: {
+          show: false,
+          loading: false,
+          type: 'sytj',
+          data: null
+        },
+      }
+    },
+    computed: {
+      navList: function () {
+        return this.curSystem === 'tjyx' ? tjyxNavList : sytjNavList;
+      }
+    },
+    methods: {
+      removePageLoading: function () {
+        document.getElementById("appLoading").style.display = "none";
+      },
+      getName: function (list, code) {
+        var name = '';
+        if (_.find(list, {'code': code})) {
+          name = _.find(list, {'code': code}).name;
+        }
+        return name;
+      },
+      showError: function (page_error, error) {
+        var message = '操作失败，请稍后重试';
+        if (page_error) {
+          message = page_error;
+        } else {
+          if (error[0]) {
+            message = error[0].mc;
+          }
+        }
+        this.$Modal.error({
+          title: '提示',
+          content: message
+        });
+      },
+      showSqtj: function (id,type) {
+        if (!id) {
+          this.$Modal.error({
+            title: '提示',
+            content: '缺少必要参数ID'
+          });
+          return;
+        }
+        if (this.sqtjModal.loading) {
+          return;
+        }
+        var url = '/sytj/stu/gettjbktj.action';
+        if (type === 'tjyx') {
+          url = '/sytj/stu/gettjyxbktj.action';
+        }
+        var _this = this;
+        _this.sqtjModal.loading = true;
+        api.syncAjax('get', url, {params: {id: id}}).then(function(res){
+          if (res.flag) {
+            _this.sqtjModal.type = type;
+            _this.sqtjModal.data = res.msg.data.vo;
+            _this.sqtjModal.show = true;
+          } else {
+            _this.showError(res.msg.message.page_error, res.msg.message.error);
+          }
+          _this.sqtjModal.loading = false;
+        }).catch(function () {
+          _this.sqtjModal.loading = false;
+        });
+      },
+    },
+    created: function () {
+      if (typeof this.active === 'undefined') {
+        this.active = '';
+      }
+      if (static) {
+        sytjNavList[2].subNavList[2].href = '/sytj/tj/fstzn.action';
+        sytjNavList[2].subNavList[3].href = '/sytj/tj/dlqtzn.action';
+      }
+    }
+  });
+</script>
+</body>
+
+</html>

@@ -5,6 +5,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class App {
+    static ArrayList<User> list = new ArrayList<>();
+    //使用静态代码块可以初始化用户数据，先存入一个用户在集合中
+    //静态代码块随着类的加载而加载，因此只执行一次
+    //如果将数据初始化放在main方法中，如果main方法被多次调用，就会在内存中生成多个集合，造成效率降低
+    static {
+        list.add(new User("wa", "wa286719", "001", "110"));
+    }
+
     public static void main(String[] args) {
         //！！！！！！！！！！！！！！！！！！！
         //！！！！！！！！！！！！！！！！！！！
@@ -17,9 +25,7 @@ public class App {
 
         //如果远程仓库发生修改导致本地仓库无法push，可以在本地创建一个新的分支，然后将远程仓库代码pull到新分支
         //然后将master在新分支上rebase，再将master commit and push
-        ArrayList<User> list = new ArrayList<>();
-        User user = new User("wa", "wa286719", "001", "110");
-        list.add(user);
+
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("欢迎来到学生管理系统");
